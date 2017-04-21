@@ -82,6 +82,22 @@ var gameOfLife = {
       console.log("cell", cell)
       this.step(cell)
     })
+      
+    
+      
+      var clearBtn = document.getElementById('clear_btn');
+      
+      clearBtn.addEventListener('click', () => {
+        console.log('clicked'); 
+        this.forEachCell(cell => {
+            cell.className = 'dead'; 
+            cell.dataset.status = 'dead';
+            
+        })
+      })
+
+      
+      
   },
 
   step: function () {
@@ -93,15 +109,17 @@ var gameOfLife = {
     // You need to:
     // 1. Count alive neighbors for all cells
     // 2. Set the next state of all cells based on their alive neighbors
-    var neighbors = []
     this.forEachCell(cell => {
-      var coord = cell.id.split('-').map(Number)
+      var neighbors = []; 
+      var coord = cell.id.split('-').map(Number);
       for (var a = coord[0]-1; a < coord[0]+1; a++) {
+        console.log("current coord",a, b); 
         for (var b = coord[1]-1; b < coord[1]+1; b++) {
           if (a === coord[0] && b === coord[1]) {
             continue;
           }
           var currentEl = document.getElementById(a + '-' + b);
+            console.log(currentEl); 
           if (currentEl) {
             neighbors.push(currentEl)
           }
